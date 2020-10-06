@@ -5,8 +5,10 @@ from sklearn.linear_model import LinearRegression
 import pickle
 import numpy as np
 import json
+import os
 
 from PIL import Image
+
 
 pickle_in = open('price_model.pkl', 'rb')
 model = pickle.load(pickle_in)
@@ -65,11 +67,7 @@ def predict_price(location, sqft, bath, balcony, bhk):
 def main():
     st.title("Bangalore House Price Prediction")
     page_bg_img = '''
-         <style>
-         body {
-         background-image: url("https://cdn.shopify.com/s/files/1/0285/1316/products/w0398_1s_Dashes-in-Geometric-Diamonds-Wallpaper-for-Walls-Gertrude-Stein_For-Interior-Walls-12.jpg?v=1586017533");
-         background-size: cover;
-         </style>
+         
 
 
          '''
@@ -84,7 +82,8 @@ def main():
 
     st.markdown(html_temp, unsafe_allow_html=True)
     st.subheader('Please enter the required details:')
-    location = st.selectbox("Choose Location", [i for i in locations[4:]])
+    loc_ind = [i for i in locations[4:]]
+    location = st.selectbox("Choose Location", loc_ind )
     sqft = st.text_input("Area in Sq-ft", "")
     bath = st.text_input("Number of Bathroom", "")
     balcony = st.text_input("Number of Balconies", "")
