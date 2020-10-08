@@ -2,16 +2,17 @@ import streamlit as st
 import pandas as pd
 from sklearn import datasets
 from sklearn.linear_model import LinearRegression
-import pickle
+import joblib
 import numpy as np
 import json
 import os
 
+
 from PIL import Image
 
 
-pickle_in = open('price_model.pkl', 'rb')
-model = pickle.load(pickle_in)
+pickle_in = open('price_model.pickle', 'rb')
+model = joblib.load(pickle_in)
 
 f = open("columns.json","r")
 columns = json.loads(f.read())
